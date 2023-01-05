@@ -5,7 +5,7 @@ const authenticatedUser = async (req, res, next) => {
 try {
     const token = req.cookies.jwtoken;
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const rootUser = await User.findOne({ _id: verifyToken._id });
+    const rootUser = await User.findById({ _id: verifyToken._id});
     if (!rootUser) {
         throw  new Error('User not found!')
     }
